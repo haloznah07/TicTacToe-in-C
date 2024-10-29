@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Deklarasi baris, kolom, dan giliran
+int turn, p, row, column,win=0, level;
+char b[3][3]={{'.','.','.'},{'.','.','.'},{'.','.','.'}};
+ int main()
+
+ { //cetak papan
+ 	for(turn=0; turn<9 && win==0; turn++){
+ 		printf("%c %c %c\n",b[0][0],b[0][1],b[0][2]);
+ 		printf("%c %c %c\n",b[1][0],b[1][1],b[1][2]);
+ 		printf("%c %c %c\n",b[2][0],b[2][1],b[2][2]);
+ 	p=turn%2+1;
+
+ 	do{
+ 		printf("Player%d your move: ", p);
+ 	scanf("%d %d",&row,&column);
+19 }while(row<0 || row>2||column<0 || column>2 || b[row][column]=='X' ||  
+b[row][column]=='O');
+
+ 	if(p==1){
+ 		b[row][column]='X';
+ 	}else{
+ 		b[row][column]='O';
+ 	}
+ //winner checking untuk horizontal
+ 	for(row=0; row<3; row++){
+ 		if(b[row][0]!='.' && b[row][0]==b[row][1] && b[row][1]==b[row][2]){
+ 		win=p;
+ 	}
+ }
+ //winner checking untuk vertikal
+ 	for(column=0; column<3; column++){
+ 	if(b[0][column]!='.' && b[0][column]==b[1][column] && b[1][column]==b[2][column]){
+ 	win=p;
+ 	}
+ }
+ //winner checking untuk diagonal hanya 2 kemungkinan
+ 	if(b[0][0]!='.'&& b[0][0]==b[1][1] && b[1][1]==b[2][2]){
+ 	win=p;
+ 	}
+ 	else if(b[0][2]!='.' && b[0][2]==b[1][1] && b[1][1]==b[2][0]){
+ 	win=p;
+ 	}
+
+ 	}
+ 	printf("%c %c %c\n",b[0][0],b[0][1],b[0][2]);
+ 	printf("%c %c %c\n",b[1][0],b[1][1],b[1][2]);
+ 	printf("%c %c %c\n",b[2][0],b[2][1],b[2][2]);
+ 	if(win!=0){
+ 		printf("Player%d wins.",win);
+ 	}else{
+ 		printf("Draw.");
+ 	}
+ 	return 0;
+ }
